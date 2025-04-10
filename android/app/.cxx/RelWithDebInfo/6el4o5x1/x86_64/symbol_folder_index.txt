@@ -1,0 +1,1 @@
+/Users/admin/Documents/PROJECTS/flutter projects/subsciption_manager/build/app/intermediates/cxx/RelWithDebInfo/6el4o5x1/obj/x86_64
