@@ -47,6 +47,7 @@ class _AddCategoryBottomSheetState extends State<AddCategoryBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return BackdropFilter(
+      key: const Key("addCategoryBottomSheetKey"),
       filter: ImageFilter.blur(
         sigmaX: 1.0,
         sigmaY: 1.0,

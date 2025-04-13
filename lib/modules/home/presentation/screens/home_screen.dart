@@ -23,8 +23,12 @@ class _HomeScreenState extends State<HomeScreen> {
     _animationNotifier = ValueNotifier(false);
     _pageController = PageController(initialPage: 1);
     _screens = [
-      const GeneralScreen(),
-      const SubscriptionScreen(),
+      const GeneralScreen(
+        key: Key("generalScreenKey"),
+      ),
+      const SubscriptionScreen(
+        key: Key("subscriptionScreenKey"),
+      ),
     ];
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _animationNotifier.value = true;
