@@ -144,6 +144,7 @@ class _Child extends StatelessWidget {
                     subscription == null
                         ? "Add a subscription"
                         : subscription!.name,
+                    key: const Key("animatedStackedListItemTitleKey"),
                     style: GoogleFonts.redHatDisplay(
                       color: Colors.white,
                       fontSize: 20.0,
@@ -207,6 +208,7 @@ class _Child extends StatelessWidget {
                     padding: const EdgeInsets.all(9.0),
                     child: Image.asset(
                       subscription!.imagePath,
+                      errorBuilder: (context, _, __) => const SizedBox(),
                     ),
                   ),
                 ),

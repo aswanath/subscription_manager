@@ -42,6 +42,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 height: 32.0,
               ),
               AnimatedTabList(
+                key: const Key("animatedTabListKey"),
                 initialIndex: state.subscriptions
                     .indexWhere((e) => e.name == state.groupName),
                 onChanged: (int index) {
@@ -72,6 +73,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               ),
               Expanded(
                 child: AnimatedStackedList(
+                  key: const Key("animatedStackedListKey"),
                   subscriptions: state.subscriptions
                       .firstWhere((e) => e.name == state.groupName)
                       .subscriptionModels,

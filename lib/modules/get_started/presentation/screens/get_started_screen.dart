@@ -38,10 +38,11 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
             clipBehavior: Clip.none,
             children: [
               Positioned(
-                  top: MediaQuery.sizeOf(context).height * 0.20,
-                  left: 0.0,
-                  right: 0.0,
-                  child: const CircleCarousel()),
+                top: MediaQuery.sizeOf(context).height * 0.20,
+                left: 0.0,
+                right: 0.0,
+                child: const AnimatedLogos(),
+              ),
               AnimatedPositioned(
                 bottom:
                     _initial ? -20.0 : MediaQuery.sizeOf(context).height * 0.35,
@@ -50,6 +51,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 duration: Durations.long4,
                 curve: Curves.easeOutCubic,
                 child: AnimatedOpacity(
+                  key: const Key("titleAnimatedOpacityKey"),
                   opacity: _initial ? 0.0 : 1.0,
                   duration: Durations.long1,
                   curve: Curves.easeOutCubic,
@@ -72,6 +74,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 duration: Durations.long4,
                 curve: Curves.easeOutCubic,
                 child: AnimatedOpacity(
+                  key: const Key("descriptionAnimatedOpacityKey"),
                   opacity: _initial ? 0.0 : 1.0,
                   curve: Curves.easeOutCubic,
                   duration: Durations.long1,
@@ -96,10 +99,12 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 duration: Durations.long4,
                 curve: Curves.easeOutCubic,
                 child: AnimatedOpacity(
+                  key: const Key("getStartedAnimatedOpacityKey"),
                   opacity: _initial ? 0.0 : 1.0,
                   duration: Durations.long1,
                   curve: Curves.easeOutCubic,
                   child: ElevatedButton(
+                    key: const Key("getStartedButtonKey"),
                     onPressed: () {
                       setState(() {
                         _tappedContinue = true;
@@ -111,7 +116,9 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                           PageRouteBuilder(
                             transitionsBuilder: (_, a, __, c) =>
                                 FadeTransition(opacity: a, child: c),
-                            pageBuilder: (_, __, ___) => const HomeScreen(),
+                            pageBuilder: (_, __, ___) => const HomeScreen(
+                              key: Key("homeScreenKey"),
+                            ),
                           ),
                         );
                       });

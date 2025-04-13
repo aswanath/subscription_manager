@@ -3,14 +3,30 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:subsciption_manager/config/constants/app_constants.dart';
 
-class CircleCarousel extends StatefulWidget {
-  const CircleCarousel({super.key});
+const List<double> xInitialPositions = [
+  -140.0,
+  70.0,
+  -90.0,
+  20.0,
+  -35.5,
+];
+
+const List<int> logoSwapPositions = [
+  2,
+  0,
+  4,
+  1,
+  3,
+];
+
+class AnimatedLogos extends StatefulWidget {
+  const AnimatedLogos({super.key});
 
   @override
-  State<CircleCarousel> createState() => _CircleCarouselState();
+  State<AnimatedLogos> createState() => _AnimatedLogosState();
 }
 
-class _CircleCarouselState extends State<CircleCarousel>
+class _AnimatedLogosState extends State<AnimatedLogos>
     with SingleTickerProviderStateMixin {
   late List<_Circle> _logos = [];
   late List<double> _xPosition = [];
@@ -28,13 +44,11 @@ class _CircleCarouselState extends State<CircleCarousel>
   }
 
   List<T> _swapLogoItems<T>(List<T> list) {
-    return [
-      list[2],
-      list[0],
-      list[4],
-      list[1],
-      list[3],
-    ];
+    final List<T> newList = [];
+    for (int i = 0; i < list.length; i++) {
+      newList.add(list[logoSwapPositions[i]]);
+    }
+    return newList;
   }
 
   @override
@@ -58,20 +72,12 @@ class _CircleCarouselState extends State<CircleCarousel>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         _initial = false;
-        _xPosition = [
-          -140.0,
-          70.0,
-          -90.0,
-          20.0,
-          -35.5,
-        ];
+        _xPosition = List.from(xInitialPositions);
       });
       Future.delayed(Durations.long4, () {
         _timer = Timer.periodic(const Duration(seconds: 2), (_) {
-          List<double>? tempXPositions;
           setState(() {
-            _xPosition = _swapPositionItems(tempXPositions ?? _xPosition);
-            tempXPositions = List.from(_xPosition);
+            _xPosition = _swapPositionItems(_xPosition);
           });
           Future.delayed(Durations.medium4, () {
             setState(() {
@@ -101,6 +107,7 @@ class _CircleCarouselState extends State<CircleCarousel>
         clipBehavior: Clip.none,
         children: [
           DecoratedBox(
+            key: const Key("logoBackgroundDecoratedBoxKey"),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               boxShadow: [
@@ -117,6 +124,7 @@ class _CircleCarouselState extends State<CircleCarousel>
           ...List.generate(
             5,
             (index) => AnimatedPositioned(
+              key: Key("logoAnimatedPositionedKey$index"),
               left: width * (_initial ? 0.4 : 0.5) + (_xPosition[index]),
               top: _initial ? MediaQuery.sizeOf(context).height * 0.8 : null,
               duration: Durations.medium2,
@@ -146,6 +154,7 @@ class _Circle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: const Key("circleContainerKey"),
       width: size,
       height: size,
       decoration: const BoxDecoration(
@@ -162,6 +171,7 @@ class _Circle extends StatelessWidget {
         padding: const EdgeInsets.all(9.0),
         child: Image.asset(
           imagePath,
+          key: const Key("logoImageKey"),
         ),
       ),
     );

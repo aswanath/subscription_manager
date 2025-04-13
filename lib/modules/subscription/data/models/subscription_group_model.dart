@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:subsciption_manager/config/constants/app_constants.dart';
 import 'package:subsciption_manager/data/models/subscription_type_model.dart';
@@ -5,7 +6,7 @@ import 'package:subsciption_manager/data/models/subscription_type_model.dart';
 part 'subscription_group_model.g.dart';
 
 @HiveType(typeId: 0)
-class SubscriptionGroupModel extends HiveObject {
+class SubscriptionGroupModel extends HiveObject with EquatableMixin {
   @HiveField(0)
   final String name;
 
@@ -19,4 +20,10 @@ class SubscriptionGroupModel extends HiveObject {
 
   List<SubscriptionTypeModel> get subscriptionModels =>
       subscriptions.map((e) => AppConstants.subscriptions[e]!).toList();
+
+  @override
+  List<Object?> get props => [
+        name,
+        subscriptions,
+      ];
 }

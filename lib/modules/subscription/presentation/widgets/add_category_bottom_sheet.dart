@@ -92,6 +92,7 @@ class _AddCategoryBottomSheetState extends State<AddCategoryBottomSheet> {
                 height: 2.0,
               ),
               TextFormField(
+                key: const Key('categoryNameFieldKey'),
                 cursorColor: AppColors.blue,
                 controller: _nameController,
                 onChanged: (_) => _checkButtonStatus(),
@@ -151,6 +152,7 @@ class _AddCategoryBottomSheetState extends State<AddCategoryBottomSheet> {
                         ),
                         Text(
                           item.name,
+                          key: Key("addCategorySubscriptionListTileKey$index"),
                           style: GoogleFonts.redHatDisplay(
                             color: Colors.white,
                             fontSize: 16.0,
@@ -159,6 +161,7 @@ class _AddCategoryBottomSheetState extends State<AddCategoryBottomSheet> {
                         ),
                         const Spacer(),
                         CustomCheckbox(
+                          key: Key('subscriptionCheckBoxKey$index'),
                           onChanged: (bool val) {
                             if (val == true) {
                               _selectedSubscriptions.add(item.name);
@@ -180,6 +183,7 @@ class _AddCategoryBottomSheetState extends State<AddCategoryBottomSheet> {
                     valueListenable: _enableButtonNotifier,
                     builder: (context, value, _) {
                       return ElevatedButton(
+                        key: const Key("saveButtonKey"),
                         onPressed: value
                             ? () {
                                 final SubscriptionGroupModel subsModel =

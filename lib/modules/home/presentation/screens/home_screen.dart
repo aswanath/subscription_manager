@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 valueListenable: _animationNotifier,
                 builder: (context, value, _) {
                   return AnimatedScale(
+                    key: const Key("menuAnimatedScaleKey"),
                     duration: Durations.long3,
                     scale: value ? 1.0 : 0.0,
                     child: RoundedIconButton(
@@ -62,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 valueListenable: _animationNotifier,
                 builder: (context, value, _) {
                   return AnimatedScale(
+                    key: const Key("customTabBarAnimatedScaleKey"),
                     duration: Durations.long3,
                     scale: value ? 1.0 : 0.0,
                     child: CustomTabBar(
@@ -76,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 valueListenable: _animationNotifier,
                 builder: (context, value, _) {
                   return AnimatedScale(
+                    key: const Key("notificationAnimatedScaleKey"),
                     duration: Durations.long3,
                     scale: value ? 1.0 : 0.0,
                     child: RoundedIconButton(
@@ -88,6 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: PageView.builder(
+        key: const Key("homeScreenPageViewBuilderKey"),
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) => _screens[index],

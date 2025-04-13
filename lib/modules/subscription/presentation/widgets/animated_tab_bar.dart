@@ -70,6 +70,7 @@ class _AnimatedTabListState extends State<AnimatedTabList> {
             duration: const Duration(milliseconds: 400),
             curve: Curves.easeOut,
             child: TabChip(
+              key: const Key("animatedTabBarTabChipKey"),
               onTap: () {
                 if (_tabs[index] == '+') {
                   widget.onAddCategoryTapped.call();
